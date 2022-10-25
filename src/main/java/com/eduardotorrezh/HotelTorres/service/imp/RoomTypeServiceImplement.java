@@ -4,6 +4,7 @@ import com.eduardotorrezh.HotelTorres.dao.RoomTypeDAO;
 import com.eduardotorrezh.HotelTorres.dto.RoomTypeDTO;
 import com.eduardotorrezh.HotelTorres.entity.RoomType;
 import com.eduardotorrezh.HotelTorres.mapper.RoomTypeMapper;
+import com.eduardotorrezh.HotelTorres.mapper.RoomTypeMapper2;
 import com.eduardotorrezh.HotelTorres.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,10 @@ public class RoomTypeServiceImplement implements RoomTypeService {
     }
 
     @Override
-    public Optional<RoomTypeDTO> getObjectById(Long id) {
+    public RoomTypeDTO getObjectById(Long id) throws Exception {
         Optional<RoomType> roomTypeOptional = roomTypeDAO.findById(id);
-        return roomTypeMapper.toOptionalDTO(roomTypeOptional.isPresent()?roomTypeOptional.get():null);
+        if (!roomTypeOptional.isEmpty())    throw new Exception("");
+        return RoomTypeMapper2.INSTANCE.toDTO(roomTypeOptional.get());
+//        return roomTypeMapper.toOptionalDTO(roomTypeOptional.isPresent()?roomTypeOptional.get():null);
     }
 }

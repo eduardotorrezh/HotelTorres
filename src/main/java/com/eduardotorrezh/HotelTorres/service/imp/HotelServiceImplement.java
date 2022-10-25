@@ -8,6 +8,7 @@ import com.eduardotorrezh.HotelTorres.dto.response.HotelResponseDTO;
 import com.eduardotorrezh.HotelTorres.entity.Hotel;
 import com.eduardotorrezh.HotelTorres.entity.Room;
 import com.eduardotorrezh.HotelTorres.mapper.HotelMapper;
+import com.eduardotorrezh.HotelTorres.mapper.HotelMapper2;
 import com.eduardotorrezh.HotelTorres.mapper.RoomMapper;
 import com.eduardotorrezh.HotelTorres.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +54,17 @@ public class HotelServiceImplement implements HotelService {
     @Override
     public HotelResponseDTO getObjectById(Long id) {
         Optional<Hotel> HotelOptional = hotelDAO.findById(id);
-        if (!HotelOptional.isPresent())
+        if (!HotelOptional.isEmpty())
             return null;
-        HotelResponseDTO hotelResponseDTO = hotelMapper.toResponseDTO(hotelMapper.toDTO(HotelOptional.get()), roomMapper.toDTOList(HotelOptional.get().getRoomList()));
-        return hotelResponseDTO;
+        return HotelMapper2.INSTANCE.toResponseDTO(HotelOptional.get(), new HotelResponseDTO());
+//        HotelResponseDTO hotelResponseDTO = hotelMapper.toResponseDTO(hotelMapper.toDTO(HotelOptional.get()), roomMapper.toDTOList(HotelOptional.get().getRoomList()));
+//        return hotelResponseDTO;
     }
 
     @Override
     public void deleteObjectById(Long id) throws Exception {
         Optional<Hotel> hotel = hotelDAO.findById(id);
-        if (!hotel.isPresent())
+        if (!hotel.isEmpty())
             throw new Exception("Object dont exist");
         hotelDAO.delete(hotel.get());
 
