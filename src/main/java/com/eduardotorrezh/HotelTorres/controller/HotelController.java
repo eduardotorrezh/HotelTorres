@@ -53,7 +53,7 @@ public class HotelController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<ResponseDTO<HotelResponseDTO>> deleteObjectById(@PathVariable long id) throws Exception {
+    ResponseEntity<ResponseDTO<HotelResponseDTO>> deleteObjectById(@PathVariable long id) {
         hotelService.deleteObjectById(id);
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, "Delete successfully");
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);

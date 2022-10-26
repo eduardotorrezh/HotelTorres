@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("room-type")
@@ -44,8 +43,7 @@ public class RoomTypeController {
 
     @GetMapping("/{id}")
     ResponseEntity<ResponseDTO<RoomTypeDTO>> getObjectById(@PathVariable long id) {
-        Optional<RoomTypeDTO> responseDTOOptional = roomTypeService.getObjectById(id);
-        ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, responseDTOOptional.isPresent()?responseDTOOptional.get():null);
+        ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, roomTypeService.getObjectById(id));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 

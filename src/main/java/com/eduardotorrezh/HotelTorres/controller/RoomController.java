@@ -27,13 +27,13 @@ public class RoomController {
     RoomService roomService;
 
     @PostMapping()
-    ResponseEntity<ResponseDTO<RoomDTO>> create(@RequestBody RoomDTO roomDTO) throws Exception {
+    ResponseEntity<ResponseDTO<RoomDTO>> create(@RequestBody RoomDTO roomDTO) {
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, roomService.createObject(roomDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @PutMapping()
-    ResponseEntity<ResponseDTO<RoomResposeDTO>> update(@RequestBody RoomRequestDTO roomRequestDTO) throws Exception {
+    ResponseEntity<ResponseDTO<RoomResposeDTO>> update(@RequestBody RoomRequestDTO roomRequestDTO) {
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, roomService.updateObject(roomRequestDTO));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
@@ -45,20 +45,20 @@ public class RoomController {
     }
 
     @GetMapping("hotel/{id}")
-    ResponseEntity<ResponseDTO<List<RoomDTO>>> getAllObjectsByHotel(@PathVariable long id) throws Exception {
+    ResponseEntity<ResponseDTO<List<RoomDTO>>> getAllObjectsByHotel(@PathVariable long id) {
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, roomService.getAllByHotelId(id));
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<ResponseDTO<RoomDTO>> getObjectById(@PathVariable long id) throws Exception {
+    ResponseEntity<ResponseDTO<RoomDTO>> getObjectById(@PathVariable long id) {
         RoomDTO roomDTO = roomService.getObjectById(id);
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, roomDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<ResponseDTO<String>> deleteObjectById(@PathVariable long id) throws Exception {
+    ResponseEntity<ResponseDTO<String>> deleteObjectById(@PathVariable long id) {
         roomService.deleteObjectById(id);
         ResponseDTO responseDTO = new ResponseDTO(Boolean.TRUE, "Delete successfully");
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
