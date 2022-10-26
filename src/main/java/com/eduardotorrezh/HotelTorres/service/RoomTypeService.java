@@ -3,7 +3,6 @@ package com.eduardotorrezh.HotelTorres.service;
 import com.eduardotorrezh.HotelTorres.dto.RoomTypeDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RoomTypeService {
 
@@ -13,6 +12,6 @@ public interface RoomTypeService {
 
     List<RoomTypeDTO> getAll();
 
-    Optional<RoomTypeDTO> getObjectById(Long id);
+    RoomTypeDTO getObjectById(Long id);
 
 }

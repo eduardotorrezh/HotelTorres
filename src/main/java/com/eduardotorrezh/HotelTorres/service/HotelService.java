@@ -16,6 +16,6 @@ public interface HotelService {
 
     HotelResponseDTO getObjectById(Long id);
 
-    void deleteObjectById(Long id) throws Exception;
+    void deleteObjectById(Long id);
 
 }
