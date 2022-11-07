@@ -2,11 +2,14 @@ package com.eduardotorrezh.HotelTorres.entity;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Data
@@ -27,7 +30,11 @@ public class Guest {
     @Column(name = "email")
     String email;
 
+    @Column(name = "deleted", columnDefinition = "boolean default true")
+    private Boolean deleted;
+
     @Column(name = "guest_type")
-    String guestType;
+    @ManyToOne(cascade={CascadeType.MERGE},fetch = FetchType.EAGER)
+    GuestType guestType;
 
 }

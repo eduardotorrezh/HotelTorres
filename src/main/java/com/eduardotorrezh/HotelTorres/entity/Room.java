@@ -27,7 +27,7 @@ import javax.persistence.Table;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -46,9 +46,14 @@ public class Room {
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 
-    @ManyToOne(cascade={CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinColumn(name="hotel_id")
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotel_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Hotel hotel;
+
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "reservation_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Reservation reservation;
 
 }
